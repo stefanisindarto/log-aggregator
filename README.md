@@ -63,4 +63,4 @@ This project makes several assumptions about the data sources and operating envi
   - If a protocol number is not found in `protocol-numbers.csv`, it defaults to 'others'.
   - If a port-protocol combination is not found in the `sample-lookup-table.csv`, it defaults to 'Untagged'.
 - **Case Sensitivity**:
-  - To ensure case insensitivity in tag comparisons and storage, all tags and protocols are stored in lowercase. This uniformity helps prevent i
+  - To ensure case insensitivity in tag comparisons and storage, all tags and protocols are stored in lowercase. This uniformity helps prevent  issues that can arise from case mismatches in processing log data.
