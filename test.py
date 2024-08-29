@@ -33,15 +33,21 @@ class TestLogAggregator(unittest.TestCase):
         cls.processor = LogAggregator(cls.lookup_file, cls.protocol_file)
 
     def test_load_lookup_table(self):
-        self.assertEqual(self.processor.lookup_table, {(80, 'tcp'): 'web traffic', (443, 'tcp'): 'secure web traffic'})
+        lookup_table_result = self.processor._load_lookup_table(self.lookup_file)
+        expected_result = {(80, 'tcp'): 'web traffic', (443, 'tcp'): 'secure web traffic'}
+        self.assertEqual(lookup_table_result, expected_result)
 
     def test_load_protocol_numbers(self):
-        self.assertEqual(self.processor.protocol_lookup, {'6': 'tcp', '17': 'udp'})
+        protocol_numbers_result = self.processor._load_protocol_numbers(self.protocol_file)
+        expected_result = {'6': 'tcp', '17': 'udp'}
+        self.assertEqual(protocol_numbers_result, expected_result)
 
     def test_process_flow_logs(self):
         tag_count, port_protocol_count = self.processor.process_flow_logs(self.flow_log_file)
-        self.assertEqual(tag_count, {'untagged': 2})
-        self.assertEqual(port_protocol_count, {(49153, 'tcp'): 1, (49154, 'tcp'): 1})
+        expected_tag_count = {'untagged': 2}
+        expected_port_protocol_count = {(49153, 'tcp'): 1, (49154, 'tcp'): 1}
+        self.assertEqual(tag_count, expected_tag_count)
+        self.assertEqual(port_protocol_count, expected_port_protocol_count)
 
     def test_save_results(self):
         tag_count = {'Secure Web Traffic': 1, 'Web Traffic': 1}

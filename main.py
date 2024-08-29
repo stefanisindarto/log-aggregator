@@ -21,10 +21,10 @@ class LogAggregator:
             lookup_file (str): Path to the CSV file containing port, protocol, and tag mappings.
             protocol_file (str): Path to the CSV file containing protocol number to protocol name mappings.
         """
-        self.lookup_table = self.load_lookup_table(lookup_file)
-        self.protocol_lookup = self.load_protocol_numbers(protocol_file)
+        self.lookup_table = self._load_lookup_table(lookup_file)
+        self.protocol_lookup = self._load_protocol_numbers(protocol_file)
 
-    def load_lookup_table(self, lookup_file):
+    def _load_lookup_table(self, lookup_file):
         """Loads a lookup table from a specified CSV file.
 
         Args:
@@ -41,7 +41,7 @@ class LogAggregator:
                 lookup_table[key] = row['tag'].lower()
         return lookup_table
 
-    def load_protocol_numbers(self, protocol_file):
+    def _load_protocol_numbers(self, protocol_file):
         """Loads protocol numbers and their corresponding names from a CSV file.
 
         Args:
